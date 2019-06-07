@@ -66,7 +66,7 @@ def upload():
         
         filename = secure_filename(file.filename)   
         new_project = Project()
-        new_project.owner =  current_user.id
+        new_project.owner =  1
         new_project.authors = request.form.get('authors')
         new_project.title = request.form.get('project_title')
         new_project.hashFilename(filename)
