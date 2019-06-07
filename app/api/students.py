@@ -29,7 +29,8 @@ def login():
       if check_password_hash(user.pwhash,password):
             token = str(user.generate_auth_token()) 
             login_user(user, remember=login_data.get('remember_me')) 
-            return jsonify({'login' : 'User successfully logged in', 'token': token})  
+            return jsonify({'login' : 'User successfully logged in',
+                            'token': token})  
       return jsonify({'message' : 'password is incorrect'}) 
         
 
