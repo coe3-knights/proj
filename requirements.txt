@@ -15,7 +15,6 @@ Flask-Mail==0.9.1
 Flask-Migrate==2.4.0
 Flask-Moment==0.7.0
 Flask-SQLAlchemy==2.3.2
-Flask-WhooshAlchemy==0.56
 Flask-WTF==0.14.2
 gunicorn
 isort==4.3.16

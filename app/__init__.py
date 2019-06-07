@@ -2,9 +2,9 @@ from flask import Flask
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from config import Config
-import flask_whooshalchemy as w
 from flask_mail import Mail
 from flask_migrate import Migrate
+import app.flask_whooshalchemy as w
 
 
 db = SQLAlchemy()
