@@ -14,11 +14,14 @@ from app.api.email import sendPaswordRequest
 @api.route('/login', methods=['GET', 'POST'])
 def login():
       try:
-         login_data = request.get_json()
+          request.get_json()
       except:
-            return badRequest('no details provided')
+          return badRequest('json object not found in request')
 
-      #login_data = request.get_json()
+      login_data = request.get_json()
+      if login_data == {}:
+          return badRequest('no details provided')
+
       email = login_data.get('email')
       password = login_data.get('password')   
       user = User.query.filter_by(email=email).first()
@@ -36,6 +39,7 @@ def login():
 
 
 @api.route("/logout", methods=["POST"])
+@basic_auth.login_requred
 def logout():
   # we have to revoke the token or leave it like that to expire by itself
   logout_user()
@@ -45,9 +49,13 @@ def logout():
 @api.route('/signup', methods=['POST'])
 def createUser():
       try:
-         new_user = request.get_json() 
+          request.get_json()
       except:
-            return badRequest('no details provided')
+          return badRequest('json object not found in request')
+
+      new_user = request.get_json()
+      if new_user == {}:
+          return badRequest('no details provided')
       
       if 'username' not in new_user or 'email' not in new_user or 'password' not in new_user:
           return badRequest('no username, password or email')      
@@ -78,12 +86,16 @@ def updateUser(username):
 
     if request.method == 'POST':
             try:
-                data = request.get_json() 
+                request.get_json() 
             except:
-                  return badRequest('no details provided') 
+                return badRequest('no json oject in request')
+            
+            data = request.get_json()
+            if data == {}:
+                return badRequest('no details provided')
 
             if current_user.username != student.username:
-                return errorResponse(403, 'You cannot perform this action')
+                return errorResponse(401, 'You cannot perform this action')
 
             if data:
               for key in data:
@@ -105,7 +117,7 @@ def updateUser(username):
 def deleteUser(username):
     user = User.query.filter_by(username=username).first()
     if user != current_user:
-       return errorResponse(403, 'You cannot perform this action')
+       return errorResponse(401, 'You cannot perform this action')
 
     db.session.delete(user)
     db.session.commit()
@@ -118,8 +130,12 @@ def deleteUser(username):
 @api.route('/student/request_password_reset', methods=['POST'])
 def requestPasswordReset():
     try:
-        req_data = request.get_json()
+        request.get_json()
     except:
+        return badRequest('json object not found in request')
+
+    req_data = request.get_json()
+    if req_data == {}:
         return badRequest('no details provided') 
 
     if 'email' not in req_data:
@@ -160,8 +176,8 @@ def getUserUploads(username):
       if student is None:
           return badRequest('user does not exist') 
 
-      if current_user.username != student.username:
-          return errorResponse(403, 'You cannot perform this action')
+      if current_user.id != student.id:
+          return errorResponse(401, 'You cannot perform this action')
 
       user = User.query.filter_by(username=username).first_or_404()
       payload = Project.query.filter_by(author=user)\
