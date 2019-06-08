@@ -1,4 +1,4 @@
-from flask import jsonify, request, url_for
+from flask import jsonify, request, url_for, render_template
 from app import db
 from app.models import User, Project
 from app.api import api
@@ -168,3 +168,10 @@ def getUserUploads(username):
           .order_by(Project.submit_date.desc())
 
       return jsonify(payload)
+
+
+@api.route('/')
+def index():
+      return render_template('web.html')
+
+
