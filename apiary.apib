@@ -1,80 +1,92 @@
 FORMAT: 1A
 HOST: http://knights-manager.herokuapp.com
 
-# cbenisson 
+# Knights-Manager 
 
-Polls is a simple API allowing consumers to view polls and vote in them.
+Knights-Manager is an API allowing users to register, search, upload and download
+student project reports
 
-## Questions Collection [/questions]
+## Search [/projects/search/{?q}]
 
-### List All Questions [GET]
+### Search a project report [GET]
+
+You can perform a query on our collection for project matches using this action.
+
++ Parameters
+    + q - query
 
 + Response 200 (application/json)
 
         [
             {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 2048
-                    }, {
-                        "choice": "Python",
-                        "votes": 1024
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 512
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 256
-                    }
-                ]
+                "title": "Faulty Intake Manifold",
+                "Authors": ["Joe Ibadon",
+                            "Frank Good"],
+                "filename": "3sjal8734bv49w838pqv08n8v348yibufuwk",
+                "size": "254452".
+                "submit_date": "2019-06-07"
+            },
+            {
+                "title": "The Conjuring",
+                "Authors": ["Joe Wakens",
+                            "McWenolds",
+                            "Charles Preston"],
+                "filename": "9jou4nfhi8w4rona3498yc3wcc74jurj3imbf",
+                "size": "254452".
+                "submit_date": "2017-03-07"
             }
         ]
 
-### Create a New Question [POST]
+## Projects [/projects]
 
-You may create your own question using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
+### Get project reports [GET]
 
-+ Request (application/json)
+Use this end point to get a repository of projects in our collection
 
-        {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
-            ]
-        }
 
-+ Response 201 (application/json)
++ Response 200 (application/json)
 
-    + Headers
-
-            Location: /questions/2
-
-    + Body
-
+        [
             {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
-                    }
-                ]
+                "title": "Faulty Intake Manifold",
+                "Authors": ["Joe Ibadon",
+                            "Frank Good"],
+                "filename": "3sjal8734bv49w838pqv08n8v348yibufuwk",
+                "size": "254452".
+                "submit_date": "2019-06-07"
+            },
+            {
+                "title": "The Conjuring",
+                "Authors": ["Joe Wakens",
+                            "McWenolds",
+                            "Charles Preston"],
+                "filename": "9jou4nfhi8w4rona3498yc3wcc74jurj3imbf",
+                "size": "254452".
+                "submit_date": "2017-03-07"
+            },
+            {
+                "title": "Cloaking Methods",
+                "Authors": ["John Prey",
+                            "Scott Presley",
+                            "Evan Mcguire"],
+                "filename": "9jou4nfhi8w4rona3498yc3wcc74jurj3imbf",
+                "size": "254452".
+                "submit_date": "2017-03-07"
+            },
+            {
+                "title": "The Pressure Point Of Mammals",
+                "Authors": ["Ella Vert",
+                            "James Quitso",
+                            "Carl Jenna"],
+                "filename": "90jomoc56sc5ecj88rc4s4tzscwfxry5w4zq33",
+                "size": "39997".GET
+                "submit_date": "2017-03-07"
             }
+        ]
+        
+
+## Contact us [/]
+
+### Get our remaining endpoints
+
+To get all our API end points, contact our developers at `knights.of.coe3@gmail.com`
