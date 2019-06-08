@@ -110,6 +110,9 @@ def search():
         project_data['size'] = len(project.file_data)
         project_data['submit_date'] = project.submit_date
         output.append(project_data)
+        
+    if output == []:
+        return jsonify({'no match found'})
 
     return jsonify(output)
 
