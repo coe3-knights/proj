@@ -26,7 +26,7 @@ class User(db.Model,UserMixin):
     pwhash = db.Column(db.String(128))
     institution = db.Column(db.String(120),nullable=False, index=True)
     department = db.Column(db.String(64),nullable=False, index=True)
-    programme = db.Column(db.String(64),nullable=False, index=True)
+    #programme = db.Column(db.String(64),nullable=False, index=True)
     registered_on = db.Column(db.DateTime, nullable=False) 
     projects = db.relationship('Project', backref='author', lazy='dynamic')
 
