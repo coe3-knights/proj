@@ -14,11 +14,11 @@ from app.api.email import sendPaswordRequest
 @api.route('/login', methods=['GET', 'POST'])
 def login():
       try:
-         login_data = request.get_json()
+         login_data = request.get_json[]
       except:
             return badRequest('no details provided')
 
-      login_data = request.get_json()
+      #login_data = request.get_json()
       email = login_data.get('email')
       password = login_data.get('password')   
       user = User.query.filter_by(email=email).first()
