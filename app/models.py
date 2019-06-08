@@ -19,14 +19,14 @@ class User(db.Model,UserMixin):
     __searchable__ = ['institution','department','programme']
 
     id = db.Column(db.Integer, primary_key=True)
-    firstname = db.Column(db.String(32),nullable=False)
-    lastname = db.Column(db.String(32),nullable=False)
-    username = db.Column(db.String(32),nullable=False)
+    firstname = db.Column(db.String(32), nullable=False)
+    lastname = db.Column(db.String(32), nullable=False)
+    username = db.Column(db.String(32), unique=True, nullable=False)
     email = db.Column(db.String(128), unique=True, nullable=False)
     pwhash = db.Column(db.String(128))
     institution = db.Column(db.String(120),nullable=False, index=True)
     department = db.Column(db.String(64),nullable=False, index=True)
-    programme = db.Column(db.String(64),nullable=False, index=True)
+    #programme = db.Column(db.String(64),nullable=False, index=True)
     registered_on = db.Column(db.DateTime, nullable=False) 
     projects = db.relationship('Project', backref='author', lazy='dynamic')
 

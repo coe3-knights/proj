@@ -70,7 +70,7 @@ def createUser():
       if email_object:  
          return badRequest('email address already used!')
 
-      User(new_user['firstname'], new_user['lastname'], new_user['username'], new_user['email'], new_user['password'], new_user['institution'], new_user['department'], new_user['programme']).save()
+      User(new_user['firstname'], new_user['lastname'], new_user['username'], new_user['email'], new_user['password'], new_user['institution'], new_user['department']).save()
       
       return jsonify({'message' : 'User Registered'}), 201
   
