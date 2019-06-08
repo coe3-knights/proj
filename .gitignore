@@ -3,3 +3,4 @@ __pycache__*
 .vscode
 app.db
 *.py[cod]
+whoosh_base

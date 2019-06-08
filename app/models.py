@@ -16,7 +16,7 @@ def load_user(id):
 
 
 class User(db.Model,UserMixin):
-    __searchable__ = ['institution','department','programme','username']
+    __searchable__ = ['institution','department','programme']
 
     id = db.Column(db.Integer, primary_key=True)
     firstname = db.Column(db.String(32),nullable=False)

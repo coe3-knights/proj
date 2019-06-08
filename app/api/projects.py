@@ -49,7 +49,7 @@ def getProjectInfo(filename):
 
 
 @api.route('/projects/upload', methods=['POST'])
-#@token_auth.login_required
+@token_auth.login_required
 def upload():
     if 'input_file' not in request.files:
         return badRequest('no input file')
@@ -66,7 +66,7 @@ def upload():
         
         filename = secure_filename(file.filename)   
         new_project = Project()
-        new_project.owner =  1
+        new_project.owner =  current_user.id
         new_project.authors = request.form.get('authors')
         new_project.title = request.form.get('project_title')
         new_project.hashFilename(filename)

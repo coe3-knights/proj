@@ -64,7 +64,7 @@ def createUser():
 
       User(new_user['firstname'], new_user['lastname'], new_user['username'], new_user['email'], new_user['password'], new_user['institution'], new_user['department'], new_user['programme']).save()
       
-      return jsonify({'message' : 'User Registered'}) 
+      return jsonify({'message' : 'User Registered'}), 201
   
     
 
