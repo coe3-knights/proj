@@ -113,7 +113,7 @@ def updateUser(username):
              
 
 @api.route('/student/<string:username>', methods=['DELETE'])
-@token_auth.login_required
+@login_required
 def deleteUser(username):
     user = User.query.filter_by(username=username).first()
     if user != current_user:
