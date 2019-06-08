@@ -1,7 +1,7 @@
 from flask import jsonify, request, url_for, render_template
 from app import db
 from app.models import User, Project
-from app.api import api
+from app.api import api, bp
 from app.api.auth import token_auth,basic_auth
 from app.api.errors import badRequest, errorResponse
 from werkzeug.security import check_password_hash
@@ -186,7 +186,7 @@ def getUserUploads(username):
       return jsonify(payload)
 
 
-@api.route('/')
+@bp.route('/')
 def index():
       return render_template('web.html')
 
