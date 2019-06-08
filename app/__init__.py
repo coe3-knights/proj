@@ -34,7 +34,7 @@ def create_app(config_class=Config):
     from app.api import api
     app.register_blueprint(api, url_prefix='/v1')
     
-    from api.api import apib
+    from app.api import apib
     app.register_blueprint(apib)
 
     return app
