@@ -39,7 +39,7 @@ def login():
 
 
 @api.route("/logout", methods=["POST"])
-@basic_auth.login_requred
+@basic_auth.login_required
 def logout():
   # we have to revoke the token or leave it like that to expire by itself
   logout_user()
@@ -113,7 +113,7 @@ def updateUser(username):
              
 
 @api.route('/student/<string:username>', methods=['DELETE'])
-@login_required
+@token_auth.login_required
 def deleteUser(username):
     user = User.query.filter_by(username=username).first()
     if user != current_user:
