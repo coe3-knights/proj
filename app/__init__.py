@@ -30,7 +30,7 @@ def create_app(config_class=Config):
     w.whoosh_index(app, User)
     #import and register blueprints here
     from app.api import api
-    app.register_blueprint(api)
+    app.register_blueprint(api, url_prefix='/v1')
 
     return app
 
