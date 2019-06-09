@@ -1,4 +1,4 @@
-# BucketList-API
+# Knights-Manager
 
 The innovative knights-manager app is an application that allows users  to users to register, search, upload and download student project reports.
 
