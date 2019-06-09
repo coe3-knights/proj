@@ -16,7 +16,7 @@ def login():
       try:
           request.get_json()
       except:
-          return badRequest('json object not found in request')
+          return badRequest('content-type must be json')
 
       login_data = request.get_json()
       if login_data == {}:
@@ -34,12 +34,12 @@ def login():
             login_user(user, remember=login_data.get('remember_me')) 
             return jsonify({'login' : 'User successfully logged in',
                             'token': token})  
-      return jsonify({'message' : 'password is incorrect'}) 
+      return badRequest('password is incorrect')
         
 
 
 @api.route("/logout", methods=["POST"])
-@basic_auth.login_required
+@token_auth.login_required
 def logout():
   # we have to revoke the token or leave it like that to expire by itself
   logout_user()
@@ -51,7 +51,7 @@ def createUser():
       try:
           request.get_json()
       except:
-          return badRequest('json object not found in request')
+          return badRequest('content-type must be json')
 
       new_user = request.get_json()
       if new_user == {}:
@@ -88,7 +88,7 @@ def updateUser(username):
             try:
                 request.get_json() 
             except:
-                return badRequest('no json oject in request')
+                return badRequest('content-type must be json')
             
             data = request.get_json()
             if data == {}:
