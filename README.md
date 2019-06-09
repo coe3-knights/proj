@@ -81,10 +81,8 @@ This is the first version of this app
 
 ## Authors
 
-* **Blessed Boakye Britwum** - *Kickstarting the project* - [@cbenisson](https://github.com/coe3-knights/proj)
-* **Godwin Krieger** 
-* **Quansah Jacklingo**
+* **Coe3 Knights**  - [@coe3-knights](https://github.com/coe3-knights/proj)
 
 ## Acknowledgments
 
-* Jephtah Yankey - Inspiring the idea.
+* Jephtah Yankey - Our Supervisor.
