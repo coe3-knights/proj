@@ -58,7 +58,10 @@ def createUser():
           return badRequest('no details provided')
       
       if 'username' not in new_user or 'email' not in new_user or 'password' not in new_user:
-          return badRequest('no username, password or email')      
+          return badRequest('no username, password or email')
+
+      if len(new_user['password']) < 8:
+        return badRequest('password must be at least 8 characters long!')     
        
       username_object = User.query.filter_by(username=new_user['username']).first() 
       email_object = User.query.filter_by(email=new_user['email']).first()
@@ -106,7 +109,7 @@ def updateUser(username):
     elif request.method == 'GET': 
          return jsonify({'username' : student.username,
                          'email' : student.email
-                       })      
+                        })      
 
            
 
@@ -158,9 +161,13 @@ def resetPassword(token):
     if not user:
         return badRequest('invalid or expired token')
     try:
-        new_password = request.get_json['new_password']
+        request.get_json('')
     except:
         return badRequest('no details provided') 
+
+    new_password = request.get_json('new_password')
+    if len(new_password) < 8:
+        return badRequest('password must be at least 8 characters long!')
 
     user.setResetPassword(new_password)
     db.session.commit()
