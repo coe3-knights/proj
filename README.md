@@ -58,7 +58,7 @@ URL Endpoint	|               HTTP Request   | Resource Accessed | Access Type|
 /v1/login	  |     POST	| Login and retrieve token|public
 /v1/logout	  |     POST	| Logout and thus deactivate token|public
 /v1/projects	  |  GET	| Get projects colletion|public
-/api/projects/search?q=<query>| GET	|Search a project|public
+/v1/projects/search?q=<query>| GET	|Search a project|public
 
 ## Deployment
 
