@@ -31,7 +31,7 @@ class User(db.Model,UserMixin):
     projects = db.relationship('Project', backref='author', lazy='dynamic')
 
 
-    def __init__(self,firstname, lastname, username, email, password, institution, department, programme):
+    def __init__(self,firstname, lastname, username, email, password, institution, department):
         self.firstname = firstname
         self.lastname = lastname
         self.username = username
@@ -39,7 +39,6 @@ class User(db.Model,UserMixin):
         self.pwhash = generate_password_hash(password)
         self.institution = institution
         self.department = department
-        self.programme = programme
         self.registered_on = datetime.utcnow()
 
 
