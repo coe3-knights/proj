@@ -1,55 +1,90 @@
-# pro_manager
-This is the main repository for our COE 356 project.
-<p> Group Name: <b>KNIGHTS</b> 
-  <table><tr>
-      <th colspan="3" >Members</th>
-    </tr><tr>
-      <th>Name</th> <th>Index No.</th> <th>Role</th>
-    </tr><tr>
-      <td>Attoh Attram Jonathan</td> <td></td> <td>Project Manager</td>
-    </tr><tr>
-      <td>Afeku Emmanuel</td> <td>5945516</td> <td>Frontend Lead</td>
-    </tr><tr>
-      <td>Nkrumah Adams Eugene</td> <td>5953416</td> <td>Frontend Support</td>
-    </tr><tr>
-      <td>Boakye Britwum Blessed</td> <td>5949416</td> <td>Backend Lead</td>
-    </tr><tr>
-      <td>Kreiger Godwin</td> <td>5952616</td> <td>Backend Support</td>
-    </tr><tr>
-      <td>Quansah Anthony Kwame Jacklingo</td> <td>5955416</td> <td>Backend Support</td>
-    </tr><tr>
-      <td>Adu Akoh Ernest</td> <td>5945216</td> <td>Chief Analyst</td>
-    </tr>
-  </table>
-</p>
-<p> Please review and make the necessary edits to the table.</p>
+# BucketList-API
 
-<hr>
+The innovative knights-manager app is an application that allows users  to users to register, search, upload and download student project reports.
 
-Please follow these steps to set-up your system for this project.
+## Getting Started
 
-1. Open up your terminal and run this code
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+- Just clone this repository by typing: `https://github.com/coe3-knights/proj.git`
+- Switch to project directory: `cd proj`
+- Install project requirements using python pip. But wait, you have to have some stuff before you get to this point. So these are:
 
-    #### `git clone https://github.com/coe3-knights/pro_manager`
+### Prerequisites
 
-2. Open the server directory and open a new terminal or run 
-    #### `cd pro_manager/server`
+- Python3.5 and above
+- Python virtual environment
+Just type:
+```
+python -V
+```
+in your terminal and if its not greater than or equal to 3.5, you're not in big trouble, there are tons of tutorials to get up up and running with these. Just grub one then come back when done.
 
-3. Create a virtual environment with the code below
-    #### `python3 -m venv venv`
+### Installing
 
-4. Activate the virtual environment
-    #### `source venv/bin/activate`
-    You terminal should now have the prompt
-        `(venv) user@machine:~/my_relative_path/pro_manager/server$`
+Now, you have python3 and a way of running a virtual environment. Lets set up the project environment.(remember we're still in the app directory)
 
-5. Upgrade pip to avoid the build-wheel error when you perform the next step. Run
-    #### `pip install -U pip`
+1. Create your virtual environment. Usually, without any wrappers:
+```
+python -m venv venv
+```
+2. Start your virtual environment:
+```
+source venv/bin/activate
+```
+3. Install the project requirements specified in the requirements.txt file. Usually,
+```
+pip install -r requirements.txt
+```
+4. *Do Migrations*. This application uses postgresql. If you don't have psql you may install it here.
+Create a `flask_api` database to be used by the application while running on your localhost.
+Then, you can do migrations as:
+```
+python manage.py db init
+python manage.py db migrate
+python manage.py db upgrade
+```
 
-6. Install all the dependecies listed in the requirements.txt file. Run
-    #### `pip install -r reqiurements.txt`
-    
-7. Create the sqlite db file by running 
-    #### `flask db upgrade`
+This is enough to get you started.
+You can now run the application using:
 
-8. Open the project folder in your favorite editor and have fun coding.
+`python run.py`
+
+## API Endpoints
+You can use postman or even curl to reach out to the following api endpoints:
+
+URL Endpoint	|               HTTP Request   | Resource Accessed | Access Type|
+----------------|-----------------|-------------|------------------
+/v1/signup  |      POST	| Register a new user|publc
+/v1/login	  |     POST	| Login and retrieve token|public
+/v1/logout	  |     POST	| Logout and thus deactivate token|public
+/v1/projects	  |  GET	| Get projects colletion|public
+/api/projects/search?q=<query>| GET	|Search a project|public
+
+## Deployment
+
+This app is ready for Heroku. You can deploy your copy of this app by:
+`heroku create <your_url_name>` (where <your_url_name> is what you want to call your app)
+`git push heroku master` 
+..and boom, you're done!
+If you have never worked with Heroku, you can learn how to [Deploy Python Applications on Heroku](https://devcenter.heroku.com/articles/getting-started-with-python#introduction)
+## Built With
+
+* [Python Flask](https://www.fullstackpython.com/flask.html) - The web framework used for this API
+
+## Contributing
+
+You can create your pull request. :D
+
+## Versioning
+
+This is the first version of this app 
+
+## Authors
+
+* **Blessed Boakye Britwum** - *Kickstarting the project* - [@cbenisson](https://github.com/coe3-knights/proj)
+* **Godwin Krieger** 
+* **Quansah Jacklingo**
+
+## Acknowledgments
+
+* Jephtah Yankey - Inspiring the idea.
