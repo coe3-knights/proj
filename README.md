@@ -77,7 +77,7 @@ You can create your pull request. :D
 
 ## Versioning
 
-This is the first version of this app 
+For the versions available, see the [tags on this repository](https://github.com/coe3-knights/proj/tags). 
 
 ## Authors
 
