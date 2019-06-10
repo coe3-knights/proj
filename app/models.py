@@ -117,20 +117,20 @@ class User(db.Model,UserMixin):
 
 
 class Project(db.Model):
-    __searchable__ = ['title','authors']
+    __searchable__ = ['title','authors','tags','supervisor','date_created']
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(128), nullable=False, index=True)
     authors = db.Column(db.Text, nullable=False, index=True)
-    submit_date = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
+    supervisor = db.Column(db.String(64), nullable=False, index=True)
+    date_created = db.Column(db.DateTime, nullable=False)
+    tags = db.Column(db.Text, index=True, nullable=False)
     file_data= db.Column(db.LargeBinary)
-    filename = db.Column(db.String(120), unique=True,nullable=False)
-    modified_at = db.Column(db.DateTime)
+    filename = db.Column(db.String(120), unique=True, nullable=False)
     owner = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
     def hashFilename(self, filename):
-        digest = md5((filename.lower()+str(datetime.utcnow())).encode('utf-8')).hexdigest()
-        self.filename = digest
+        self.filename = md5((filename.lower()+str(datetime.utcnow())).encode('utf-8')).hexdigest()
 
     @staticmethod
     def allowed_file(filename):
