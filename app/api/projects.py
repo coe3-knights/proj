@@ -40,9 +40,11 @@ def getProjectInfo(filename):
     project_data = {}
     project_data['title'] = project.title
     project_data['authors'] = project.authors
+    project_data['supervisor'] = project.supervisor
+    project_data['tags'] = project.tags
     project_data['filename'] = project.filename
     project_data['size'] = len(project.file_data)
-    project_data['submit_date'] = project.submit_date
+    project_data['date_created'] = project.date_created
 
     return jsonify(project_data)
 
@@ -69,6 +71,9 @@ def upload():
         new_project.owner =  current_user.id
         new_project.authors = request.form.get('authors')
         new_project.title = request.form.get('project_title')
+        new_project.supervisor = request.form.get('supervisor')
+        new_project.tags = request.form.get('tags')
+        new_project.date_created = request.form.get('date_created')
         new_project.hashFilename(filename)
         new_project.file_data = file.read()
         db.session.add(new_project)
@@ -106,9 +111,11 @@ def search():
         project_data = {}
         project_data['title'] = project.title
         project_data['authors'] = project.authors
+        project_data['supervisor'] = project.supervisor
+        project_data['tags'] = project.tags
         project_data['filename'] = project.filename
         project_data['size'] = len(project.file_data)
-        project_data['submit_date'] = project.submit_date
+        project_data['date_created'] = project.date_created
         output.append(project_data)
         
     if output == []:
