@@ -124,7 +124,7 @@ class Project(db.Model):
     authors = db.Column(db.Text, nullable=False, index=True)
     supervisor = db.Column(db.String(64), nullable=False, index=True)
     date_created = db.Column(db.DateTime, nullable=False)
-    date_submitted = db.Column(db.Datetime, nullable=False, default=datetime.utcnow)
+    submit_date = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     tags = db.Column(db.Text, index=True, nullable=False)
     file_data= db.Column(db.LargeBinary)
     filename = db.Column(db.String(120), unique=True, nullable=False)
