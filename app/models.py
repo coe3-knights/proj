@@ -129,6 +129,7 @@ class Project(db.Model):
     file_data= db.Column(db.LargeBinary)
     filename = db.Column(db.String(120), unique=True, nullable=False)
     owner = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    pdf_page_count = db.Column(db.Integer)
 
     def hashFilename(self, filename):
         self.filename = md5((filename.lower()+str(datetime.utcnow())).encode('utf-8')).hexdigest()
