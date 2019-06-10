@@ -23,7 +23,8 @@ def explore():
         project_data['authors'] = project.authors
         project_data['filename'] = project.filename
         project_data['size'] = len(project.file_data)
-        project_data['submit_date'] = project.submit_date
+        project_data['date_created'] = project.date_created
+        project_data['pdf_page_count'] = project.pdf_page_count
         output.append(project_data)
 
     return jsonify(output)    
@@ -117,6 +118,8 @@ def search():
         project_data['filename'] = project.filename
         project_data['size'] = len(project.file_data)
         project_data['date_created'] = project.date_created
+        project_data['pdf_page_count'] = project.pdf_page_count
+       
         output.append(project_data)
         
     if output == []:
