@@ -66,6 +66,10 @@ def upload():
                 errors.append(f"{field} field missing in request") 
         if errors != []:
             return badRequest(errors)
+        try:
+            date_in_req = datetime.strptime(request.form.get('date_created'), '%Y-%m-%d')
+        except:
+            return badRequest('invalid date format. expected "yyyy-mm-dd"')
         
         filename = secure_filename(file.filename)   
         new_project = Project()
@@ -75,7 +79,7 @@ def upload():
         new_project.title = request.form.get('project_title')
         new_project.supervisor = request.form.get('supervisor')
         new_project.tags = request.form.get('tags')
-        new_project.date_created = request.form.get('date_created')
+        new_project.date_created = date_in_req
         new_project.hashFilename(filename)
         #new_project.author = g.current_user
 
