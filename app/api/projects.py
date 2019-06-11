@@ -7,6 +7,7 @@ from app.api.auth import token_auth
 from app.api.errors import badRequest, errorResponse
 from flask_login import current_user
 from werkzeug.utils import secure_filename
+from datetinme import datetime
 
 
 @api.route('/projects', methods=['GET'])
@@ -67,6 +68,11 @@ def upload():
         if errors != []:
             return badRequest(errors)
         
+        try:
+            date_in_req = datetime.strptime(request.form.get('date_created'), '%Y-%m-%d')
+        except:
+            return badRequest('wrong date format. expected "yyyy-mm-dd" in date_created field')
+        
         filename = secure_filename(file.filename)   
         new_project = Project()
         new_project.owner =  current_user.id
@@ -74,7 +80,7 @@ def upload():
         new_project.title = request.form.get('project_title')
         new_project.supervisor = request.form.get('supervisor')
         new_project.tags = request.form.get('tags')
-        new_project.date_created = request.form.get('date_created')
+        new_project.date_created = date_in_req
         new_project.hashFilename(filename)
         new_project.file_data = file.read()
         new_project.pdf_page_count = request.form.get('pdf_page_count')
