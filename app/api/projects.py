@@ -58,7 +58,6 @@ def upload():
     if 'input_file' not in request.files:
         return badRequest('no input file')
     file = request.files['input_file']
-    return jsonify(request.form)
         
     if Project.allowed_file(file.filename):
         errors = []
@@ -80,7 +79,12 @@ def upload():
             new_project.tags = request.form.get('tags')
             new_project.date_created = request.form.get('date_created')
             new_project.hashFilename(filename)
-            new_project.file_data = file.read()
+            
+            try:
+               new_project.file_data = file.read()
+            except:
+               return jsonify("message":"file not found")
+        
             new_project.pdf_page_count = request.form.get('pdf_page_count')
             db.session.add(new_project)
             db.session.commit()
