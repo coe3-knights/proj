@@ -78,9 +78,9 @@ def upload():
         new_project.owner =  current_user.id
         new_project.authors = request.form.get('authors')
         new_project.title = request.form.get('project_title')
-        new_project.supervisor = request.form.get('supervisor')
-        new_project.tags = request.form.get('tags')
-        new_project.date_created = date_in_req
+        #new_project.supervisor = request.form.get('supervisor')
+        #new_project.tags = request.form.get('tags')
+        #new_project.date_created = date_in_req
         new_project.hashFilename(filename)
         new_project.file_data = file.read()
         new_project.pdf_page_count = request.form.get('pdf_page_count')
