@@ -58,7 +58,6 @@ def upload():
     if 'input_file' not in request.files:
         return badRequest('no input file')
     file = request.files['input_file']
-    return jsonify(g.current_user.id)
 
     if Project.allowed_file(file.filename):
         errors = []
@@ -91,7 +90,7 @@ def upload():
             db.session.commit()
             return jsonify('upload success'), 201
         except:
-            return jsonify('upload')
+            return jsonify({"message":"failed"})
     
     return errorResponse(415, 'upload a .pdf file!')
     
