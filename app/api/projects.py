@@ -1,4 +1,4 @@
-from flask import jsonify, request, send_file, url_for, current_app
+from flask import g,jsonify, request, send_file, url_for, current_app
 from io import BytesIO
 from app import db
 from app.models import Project, User
@@ -73,7 +73,7 @@ def upload():
         filename = secure_filename(file.filename)   
         new_project = Project()
         try:
-            new_project.owner = current_user.id
+            new_project.owner = g.current_user.id
             new_project.authors = request.form.get('authors')
             new_project.title = request.form.get('project_title')
             new_project.supervisor = request.form.get('supervisor')
@@ -95,7 +95,7 @@ def upload():
                 return jsonify({"message" : "no commit"})
             return jsonify('upload success'), 201
         except:
-            return jsonify(current_user.id)
+            return jsonify('upload')
     
     return errorResponse(415, 'upload a .pdf file!')
     
