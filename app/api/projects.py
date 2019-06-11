@@ -58,6 +58,7 @@ def upload():
     if 'input_file' not in request.files:
         return badRequest('no input file')
     file = request.files['input_file']
+    return jsonify(g.current_user.id)
 
     if Project.allowed_file(file.filename):
         errors = []
@@ -66,8 +67,6 @@ def upload():
                 errors.append(f"{field} field missing in request") 
         if errors != []:
             return badRequest(errors)
-        
-        
         
         filename = secure_filename(file.filename)   
         new_project = Project()
@@ -80,18 +79,16 @@ def upload():
             new_project.date_created = request.form.get('date_created')
             new_project.hashFilename(filename)
             new_project.author = g.current_user
-            
+        
             try:
                new_project.file_data = file.read()
             except:
                return jsonify({"message":"file not found"})
         
             new_project.pdf_page_count = request.form.get('pdf_page_count')
-            try:
-               db.session.add(new_project)
-               db.session.commit()
-            except:
-                return jsonify({"message" : "no commit"})
+            
+            db.session.add(new_project)
+            db.session.commit()
             return jsonify('upload success'), 201
         except:
             return jsonify('upload')
