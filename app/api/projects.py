@@ -77,7 +77,7 @@ def upload():
             new_project.tags = request.form.get('tags')
             new_project.date_created = request.form.get('date_created')
             new_project.hashFilename(filename)
-            new_project.author = g.current_user
+            #new_project.author = g.current_user
         
             try:
                new_project.file_data = file.read()
