@@ -117,7 +117,7 @@ class User(db.Model,UserMixin):
 
 
 class Project(db.Model):
-    __searchable__ = ['title','authors','tags','supervisor','date_created']
+    __searchable__ = ['title','authors','tags','supervisor']
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(128), nullable=False, index=True)
