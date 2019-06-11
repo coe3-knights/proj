@@ -53,7 +53,7 @@ def getProjectInfo(filename):
 
 
 @api.route('/projects/upload', methods=['POST'])
-@token_auth.login_required
+#@token_auth.login_required
 def upload():
     if 'input_file' not in request.files:
         return badRequest('no input file')
