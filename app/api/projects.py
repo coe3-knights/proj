@@ -75,7 +75,7 @@ def upload():
         new_project.title = request.form.get('project_title')
         new_project.supervisor = request.form.get('supervisor')
         new_project.tags = request.form.get('tags')
-        new_project.setDateCreated(request.form.get('date_created'))
+        new_project.date_created = datetime.strptime(request.form.get('date_created'), '%Y,%m,%d')
         new_project.hashFilename(filename)
         new_project.file_data = file.read()
         new_project.pdf_page_count = request.form.get('pdf_page_count')
