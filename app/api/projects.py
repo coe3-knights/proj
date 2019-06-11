@@ -86,8 +86,11 @@ def upload():
                return jsonify({"message":"file not found"})
         
             new_project.pdf_page_count = request.form.get('pdf_page_count')
-            db.session.add(new_project)
-            db.session.commit()
+            try:
+               db.session.add(new_project)
+               db.session.commit()
+            except:
+                return jsonify({"message" : "no commit"})
             return jsonify('upload success'), 201
         except:
             return jsonify({"message" : "its empty"})
