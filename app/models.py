@@ -29,6 +29,7 @@ class User(db.Model,UserMixin):
     #programme = db.Column(db.String(64),nullable=False, index=True)
     registered_on = db.Column(db.DateTime, nullable=False) 
     projects = db.relationship('Project', backref='author', lazy='dynamic')
+    is_resgitered = db.relationship(db.Boolean, nullable=False)
 
 
     def __init__(self,firstname, lastname, username, email, password, institution, department):
@@ -40,6 +41,7 @@ class User(db.Model,UserMixin):
         self.institution = institution
         self.department = department
         self.registered_on = datetime.utcnow()
+        self.is_registered =True
 
 
     def verify_password_from_db(self, password):
