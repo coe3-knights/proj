@@ -7,7 +7,7 @@ from app.api.auth import token_auth
 from app.api.errors import badRequest, errorResponse
 from flask_login import current_user
 from werkzeug.utils import secure_filename
-from datetinme import datetime
+from datetime import datetime
 
 
 @api.route('/projects', methods=['GET'])
