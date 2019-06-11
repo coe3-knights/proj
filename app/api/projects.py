@@ -83,7 +83,7 @@ def upload():
             try:
                new_project.file_data = file.read()
             except:
-               return jsonify("message":"file not found")
+               return jsonify({"message":"file not found"})
         
             new_project.pdf_page_count = request.form.get('pdf_page_count')
             db.session.add(new_project)
