@@ -93,7 +93,7 @@ def upload():
                 return jsonify({"message" : "no commit"})
             return jsonify('upload success'), 201
         except:
-            return jsonify({"message" : "its empty"})
+            return jsonify(current_user.id)
     
     return errorResponse(415, 'upload a .pdf file!')
     
