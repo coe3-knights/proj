@@ -60,6 +60,13 @@ def upload():
     file = request.files['input_file']
     
     if Project.allowed_file(file.filename):
+        errors = []
+        for field in ['project_title', 'authors']:
+            if request.form.get(field) is None:
+                errors.append(f"{field} field missing in request") 
+        if errors != []:
+            return badRequest(errors)
+        
         try:
             date_in_req = datetime.strptime(request.form.get('date_created'), '%Y-%m-%d')
         except:
