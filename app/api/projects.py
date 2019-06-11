@@ -58,7 +58,6 @@ def upload():
     if 'input_file' not in request.files:
         return badRequest('no input file')
     file = request.files['input_file']
-    return jsonify({"message" : "passed authenticated"})
 
     if Project.allowed_file(file.filename):
         errors = []
