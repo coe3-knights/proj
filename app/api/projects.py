@@ -69,28 +69,28 @@ def upload():
         
         filename = secure_filename(file.filename)   
         new_project = Project()
+        #try:
+        new_project.owner = g.current_user.id
+        new_project.authors = request.form.get('authors')
+        new_project.title = request.form.get('project_title')
+        new_project.supervisor = request.form.get('supervisor')
+        new_project.tags = request.form.get('tags')
+        new_project.date_created = request.form.get('date_created')
+        new_project.hashFilename(filename)
+        #new_project.author = g.current_user
+
         try:
-            new_project.owner = g.current_user.id
-            new_project.authors = request.form.get('authors')
-            new_project.title = request.form.get('project_title')
-            new_project.supervisor = request.form.get('supervisor')
-            new_project.tags = request.form.get('tags')
-            new_project.date_created = request.form.get('date_created')
-            new_project.hashFilename(filename)
-            #new_project.author = g.current_user
-        
-            try:
-               new_project.file_data = file.read()
-            except:
-               return jsonify({"message":"file not found"})
-        
-            new_project.pdf_page_count = request.form.get('pdf_page_count')
-            
-            db.session.add(new_project)
-            db.session.commit()
-            return jsonify('upload success'), 201
+           new_project.file_data = file.read()
         except:
-            return jsonify({"message":"failed"})
+           return jsonify({"message":"file not found"})
+
+        new_project.pdf_page_count = request.form.get('pdf_page_count')
+
+        db.session.add(new_project)
+        db.session.commit()
+        return jsonify('upload success'), 201
+        #except:
+            #return jsonify({"message":"failed"})
     
     return errorResponse(415, 'upload a .pdf file!')
     
