@@ -58,7 +58,18 @@ def upload():
     if 'input_file' not in request.files:
         return badRequest('no input file')
     file = request.files['input_file']
-    return jsonify(request.form.get('authors'))
+     try:
+            new_project.owner =  current_user.id
+            new_project.authors = request.form.get('authors')
+            new_project.title = request.form.get('project_title')
+            new_project.supervisor = request.form.get('supervisor')
+            new_project.tags = request.form.get('tags')
+            new_project.file_data = file.read()
+            new_project.pdf_page_count = request.form.get('pdf_page_count')
+            return jsonify('upload success'), 201
+        except:
+            return jsonify({"message" : "its empty"})
+        
     if Project.allowed_file(file.filename):
         errors = []
         for field in ['project_title', 'authors']:
