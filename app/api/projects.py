@@ -55,6 +55,7 @@ def getProjectInfo(filename):
 @api.route('/projects/upload', methods=['POST'])
 @token_auth.login_required
 def upload():
+    return jsonify({"message" : "passed authenticated"})
     if 'input_file' not in request.files:
         return badRequest('no input file')
     file = request.files['input_file']
