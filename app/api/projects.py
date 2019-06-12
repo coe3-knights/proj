@@ -147,7 +147,7 @@ def search():
 def deleteProject(filename):
     project = Project.query.filter_by(filename=filename).first()
     
-    if project.owner != current_user.id:
+    if project.owner != g.current_user.id:
         return errorResponse(401, 'action not allowed for this user')
 
     if project is None:
