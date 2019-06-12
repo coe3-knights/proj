@@ -119,7 +119,7 @@ def updateUser(username):
 @token_auth.login_required
 def deleteUser(username):
     user = User.query.filter_by(username=username).first()
-    if user != current_user:
+    if user != g.current_user:
        return errorResponse(401, 'You cannot perform this action')
 
     db.session.delete(user)
@@ -183,7 +183,7 @@ def getUserUploads(username):
       if student is None:
           return badRequest('user does not exist') 
 
-      if current_user.id != student.id:
+      if g.current_user.id != student.id:
           return errorResponse(401, 'You cannot perform this action')
 
       user = User.query.filter_by(username=username).first_or_404()
