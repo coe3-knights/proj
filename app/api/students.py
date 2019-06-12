@@ -187,10 +187,24 @@ def getUserUploads(username):
           return errorResponse(401, 'You cannot perform this action')
 
       user = User.query.filter_by(username=username).first_or_404()
-      payload = Project.query.filter_by(author=user)\
+      projects = Project.query.filter_by(author=user)\
           .order_by(Project.submit_date.desc())
 
-      return jsonify(payload)
+      if projects is None:
+        return jsonify({'message' : 'No project uploaded yet!'})
+
+      output = []
+      for project in projects:
+        project_data = {}
+        project_data['title'] = project.title
+        project_data['authors'] = project.authors
+        project_data['filename'] = project.filename
+        project_data['size'] = len(project.file_data)
+        project_data['date_created'] = project.date_created
+        project_data['pdf_page_count'] = project.pdf_page_count
+        output.append(project_data)
+
+      return jsonify(output)
 
 
 @apib.route('/')
