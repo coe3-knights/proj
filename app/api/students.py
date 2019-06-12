@@ -1,4 +1,4 @@
-from flask import jsonify, request, url_for, render_template
+from flask import g, jsonify, request, url_for, render_template
 from app import db
 from app.models import User, Project
 from app.api import api, apib
