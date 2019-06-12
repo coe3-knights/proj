@@ -187,7 +187,7 @@ def getUserUploads(username):
           return errorResponse(401, 'You cannot perform this action')
 
       #user = User.query.filter_by(username=username).first_or_404()
-      projects = Project.query.get(owner=g.current_user.id)\
+      projects = Project.query.filter_by(author=g.current_user)\
           .order_by(Project.submit_date.desc())
 
       if projects is None:
