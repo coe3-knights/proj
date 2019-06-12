@@ -112,6 +112,8 @@ def download(filename):
 @api.route('/projects/search')
 def search():
     q = request.args.get('q')
+    if q is None:
+        return badRequest('no query provided')
     projects = Project.query.whoosh_search(q).all()
     users = User.query.whoosh_search(q).all()
   
